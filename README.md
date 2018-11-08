@@ -16,10 +16,17 @@ You will need to authorize your terminal emulator program (I use iTerm) to have 
 
 # Installation
 
+1. Clone the repository into some path on your workstation.
+
+2. Create two folders: 
+
+- a scratch folder that export files can temporarily live in
+- a new git repository to hold your book project
+
 Rename `settings.example` to `settings` and customize these two paths:
 
-- `EXPORT_PATH` needs to be a scratch directory that exports can go in
-- `REPO_PATH` needs to be an existing git repository that your project will get updated with.
+- `EXPORT_PATH` should point to the scratch folder.
+- `REPO_PATH` should point to your git repository.
 
 # Usage
 
@@ -29,8 +36,12 @@ $ ./export
 [Script output will follow]
 ```
 
+You may then point your repository at some offsite provider (I like BitBucket), use git tools to visualize your project history, or whatever else you like using Git for.
+
 # Limitations
 
-- This is not set up to handle multiple Scrivener projects at a time. It will export whatever project is open in Scrivener to the git repo that you select.
+- This is not set up to handle multiple Scrivener projects at a time. It will export whatever project is open in Scrivener to the git repo that you specify.
 - The "Draft" folder in Scrivener is what will get exported.
 - This currently uses plain text only. No pictures or formatting will get preserved.
+- The export folder will need cleanup from time to time.
+- The export only works in one direction. There is no way to update Scrivener with any changes you make in the Git repository. My theory is that Scrivener is the place where you do all your writing, and Git is just a mirror where version tracking can happen.
