@@ -14,7 +14,7 @@ LATEST_EXPORT=$(ls -t | head -1)
 
 echo "Backing up $LATEST_EXPORT"
 
-rsync -rzvu --ignore-times --delete "$LATEST_EXPORT"/ "$REPO_PATH"/content
+rsync -rzu --ignore-times --delete "$LATEST_EXPORT"/ "$REPO_PATH"/content
 
 cd $REPO_PATH
 

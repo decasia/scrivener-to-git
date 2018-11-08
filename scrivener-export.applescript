@@ -4,7 +4,6 @@ on run argv
 
     tell application "System Events"
       set frontmostProcess to first process where it is frontmost
-      set frontmost of frontmostProcess to true
 
       tell process "Scrivener"
         set frontmost to true
