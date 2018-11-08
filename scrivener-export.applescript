@@ -3,6 +3,9 @@ on run argv
     set exportPath to item 1 of argv
 
     tell application "System Events"
+      set frontmostProcess to first process where it is frontmost
+      set frontmost of frontmostProcess to true
+
       tell process "Scrivener"
         set frontmost to true
         set projectName to name of front window
@@ -28,6 +31,11 @@ on run argv
 
         -- export files
         keystroke return
+        delay 1.5
       end tell
+
+      -- switch back to the initial process
+      set frontmost of frontmostProcess to true
     end tell
+
 end run

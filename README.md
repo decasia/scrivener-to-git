@@ -21,7 +21,7 @@ You will need to authorize your terminal emulator program (I use iTerm) to have 
 2. Create two folders: 
 
 - a scratch folder that export files can temporarily live in
-- a new git repository to hold your book project
+- a new git repository to hold your book project. It also needs one subfolder called "content" which we will update with new content.
 
 Rename `settings.example` to `settings` and customize these two paths:
 
