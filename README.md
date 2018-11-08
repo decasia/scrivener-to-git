@@ -24,7 +24,7 @@ Rename `settings.example` to `settings` and customize these two paths:
 # Usage
 
 ```
-$ cd /path/to/scrivener-export
+$ cd /path/to/scrivener-to-git
 $ ./export
 [Script output will follow]
 ```
