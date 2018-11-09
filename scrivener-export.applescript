@@ -19,7 +19,7 @@ on run argv
         -- enter temp file name
         delay 0.5
         keystroke theDate
-        keystroke "-"
+        keystroke "|"
         keystroke projectName
 
         -- navigate to the scratch folder

@@ -1,0 +1,6 @@
+---
+
+export_path: "/Users/YOURUSER/scratch/scrivener"
+repo_paths:
+  "Scrivener Project Name 1": "/Users/YOURUSER/Projects/SCRIVENER-REPO-1"
+  "Scrivener Project Name 2": "/Users/YOURUSER/Projects/SCRIVENER-REPO-2"
