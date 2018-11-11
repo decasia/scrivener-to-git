@@ -2,35 +2,48 @@
 
 require 'yaml'
 require 'fileutils'
+require 'tmpdir'
+
+# Utility output function
+def ok(message)
+  puts "✅ #{message}"
+end
 
 # Load settings
 settings = YAML.load_file 'settings.yml'
-export_path = settings['export_path']
 
-# Run Scrivener export
-output = `osascript scrivener-export.applescript #{export_path}`
-abort("AppleScript output: #{output}") unless output.strip.empty?
-abort("AppleScript failed for some reason: #{output}") unless $?.success?
+# Make temp directory
+Dir.mktmpdir do |tmp_dir|
+  ok "Using temp folder at #{tmp_dir}"
 
-# Find latest export folder
-Dir.chdir export_path
-latest_export = Dir['*'].sort_by { |f| File.mtime(f) }.last
-latest_export_path = "#{export_path}/#{latest_export}"
+  # Run Scrivener export
+  output = `osascript scrivener-export.applescript #{tmp_dir}`
+  abort("AppleScript output: #{output}") unless output.strip.empty?
+  abort("AppleScript failed for some reason: #{output}") unless $?.success?
+  ok "Successfully exported plain text from Scrivener"
 
-# Export should be a directory
-abort("Latest export is not a directory") unless File.directory? latest_export_path
+  # Find latest export folder
+  latest_export_path = Dir.glob("#{tmp_dir}/*").first
 
-# Look up repo path for this project
-project_name = latest_export.split('|').last
-repo_path = settings['repo_paths'][project_name]
-abort("No repo path found for #{project_name}") unless repo_path
+  # Export folder should be a directory
+  abort("Latest export is not a directory") unless File.directory? latest_export_path
 
-puts "rsync -rzvu --ignore-times --delete \"#{latest_export_path}/\" #{repo_path}/content"
-puts `rsync -rzvu --ignore-times --delete \"#{latest_export_path}/\" #{repo_path}/content`
-abort("Rsync failed.") unless $?.success?
+  # Look up repo path for this project
+  project_name = latest_export_path.split('|').last
+  repo_path = settings['repo_paths'][project_name]
+  abort("No repo path found for #{project_name}") unless repo_path
 
-# Remove temp folder
-# puts "Removing #{export_path}/#{latest_export}"
-# FileUtils.rm_rf("#{export_path}/#{latest_export}")
+  # Verify that the repo has a content directory
+  dest_path = "#{repo_path}/content"
+  abort("Repo #{repo_path} has no content directory") unless File.directory? dest_path
 
-puts "Successfully exported Scrivener project #{project_name} to git."
+  # Remove original (easiest way to handle any removed files in the src folder)
+  ok "Removing #{dest_path}"
+  FileUtils.rm_rf "#{dest_path}"
+
+  # Copy source to dest
+  ok "Copying #{latest_export_path}/ to #{dest_path}"
+  FileUtils.mv "#{latest_export_path}/", "#{dest_path}"
+
+  ok "Successfully exported Scrivener project #{project_name} to git"
+end

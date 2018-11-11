@@ -18,14 +18,10 @@ You will need to authorize your terminal emulator program (I use iTerm) to have 
 
 1. Clone the repository into some path on your workstation.
 
-2. Create two folders: 
+2. Create a git repository for each project you plan on exporting. Each git repositories will need one subfolder called "content," which we will update with new content.
 
-- a scratch folder that export files can temporarily live in
-- a new git repository for each project you plan on exporting. Each of these git repositories will need one subfolder called "content," which we will update with new content.
+3. Rename `settings.yml.example` to `settings.yml` and add appropriate settings:
 
-Rename `settings.yml.example` to `settings.yml` and add appropriate settings:
-
-- `export_path` should point to the scratch folder.
 - `repo_paths` should be a dictionary whose keys are Scrivener project names and whose values are paths to git repos.
 
 # Usage
@@ -43,4 +39,3 @@ You may then point your repository at some offsite provider (I like BitBucket), 
 - The "Draft" folder in Scrivener is what will get exported.
 - This currently uses plain text only. No pictures or formatting will get preserved.
 - The export only works in one direction. There is no way to update Scrivener with any changes you make in the Git repository. My theory is that Scrivener is the place where you do all your writing, and Git is just a mirror where version tracking can happen.
-- Automatic removal of the export scratch folder is on hold while I verify that there are no strange edge cases. UI scripting is hard.

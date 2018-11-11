@@ -29,6 +29,7 @@ on run argv
         keystroke return
 
         -- export files
+        delay 1.0
         keystroke return
         delay 1.5
       end tell
