@@ -9,12 +9,15 @@ on run argv
         set frontmost to true
         set projectName to name of front window
 
-        -- select the right UI state
-        click menu item "Binder" of menu 1 of menu item "Move Focus To" of menu "Navigate" of menu bar 1
+        -- select the right UI state. prefer keyboard.
+        -- select binder
+        -- click menu item "Binder" of menu 1 of menu item "Move Focus To" of menu "Navigate" of menu bar 1
+        keystroke "B" using {control down, option down, command down}
         click menu item "Reveal Draft Folder" of menu "Navigate" of menu bar 1
 
         -- export
         click menu item "Files..." of menu 1 of menu item "Export" of menu "File" of menu bar 1
+        -- keystroke "E" using {shift down, command down}
 
         -- enter temp file name
         delay 0.5
