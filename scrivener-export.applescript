@@ -9,11 +9,9 @@ on run argv
         set frontmost to true
         set projectName to name of front window
 
-        -- select the right UI state. prefer keyboard.
-        -- select binder
-        -- click menu item "Binder" of menu 1 of menu item "Move Focus To" of menu "Navigate" of menu bar 1
-        keystroke "B" using {control down, option down, command down}
-        click menu item "Reveal Draft Folder" of menu "Navigate" of menu bar 1
+        -- select Draft
+        click menu item "Draft" of menu 1 of menu item "Go To" of menu "Navigate" of menu bar 1
+        delay 1.5
 
         -- export
         click menu item "Files..." of menu 1 of menu item "Export" of menu "File" of menu bar 1
@@ -26,7 +24,7 @@ on run argv
         keystroke return
 
         -- export files
-        delay 1.0
+        delay 1.5
         keystroke return
         delay 1.5
       end tell
