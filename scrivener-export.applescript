@@ -19,12 +19,6 @@ on run argv
         click menu item "Files..." of menu 1 of menu item "Export" of menu "File" of menu bar 1
         -- keystroke "E" using {shift down, command down}
 
-        -- enter temp file name
-        delay 0.5
-        keystroke theDate
-        keystroke "|"
-        keystroke projectName
-
         -- navigate to the scratch folder
         delay 0.5
         keystroke "G" using {shift down, command down}
@@ -41,4 +35,5 @@ on run argv
       set frontmost of frontmostProcess to true
     end tell
 
+    return projectName & "/OK"
 end run

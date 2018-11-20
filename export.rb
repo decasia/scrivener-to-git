@@ -26,6 +26,11 @@ Dir.mktmpdir do |tmp_dir|
   die("AppleScript output: #{output}") unless output.include?('/OK')
   die("AppleScript failed for some reason: #{output}") unless $?.success?
 
+  # Find project name
+  project_name = output.split('/').first.strip
+  die("Failed to find project name in #{output}") if project_name.empty?
+  ok "Successfully exported plain text from Scrivener project #{project_name}"
+
   # Find latest export folder
   latest_export_path = Dir.glob("#{tmp_dir}/*").first
 
@@ -36,7 +41,6 @@ Dir.mktmpdir do |tmp_dir|
   end
 
   # Look up repo path for this project
-  project_name = latest_export_path.split('|').last
   repo_path = settings['repo_paths'][project_name]
   die("No repo path found for #{project_name}") unless repo_path
 
