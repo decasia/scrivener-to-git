@@ -14,15 +14,18 @@ def die(message)
   abort
 end
 
+settings_path = File.expand_path 'settings.yml', __dir__
+applescript_path = File.expand_path 'scrivener-export.applescript', __dir__
+
 # Load settings
-settings = YAML.load_file 'settings.yml'
+settings = YAML.load_file settings_path
 
 # Make temp directory
 Dir.mktmpdir do |tmp_dir|
   ok "Using temp folder at #{tmp_dir}"
 
   # Run Scrivener export
-  output = `osascript scrivener-export.applescript #{tmp_dir}`
+  output = `osascript #{applescript_path} #{tmp_dir}`
   die("AppleScript output: #{output}") unless output.include?('/OK')
   die("AppleScript failed for some reason: #{output}") unless $?.success?
 
