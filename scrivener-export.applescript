@@ -1,5 +1,4 @@
 on run argv
-    set theDate to the ((current date) as «class isot» as string)
     set exportPath to item 1 of argv
 
     tell application "System Events"
