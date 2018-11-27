@@ -8,12 +8,12 @@ on run argv
         set frontmost to true
         set projectName to name of front window
 
+        -- ensure that the Binder is active in the UI
+        keystroke "B" using {control down, option down, command down}
+
         -- select Draft Folder in Binder
         click menu item "Draft" of menu 1 of menu item "Go To" of menu "Navigate" of menu bar 1
         delay 1.5
-
-        -- ensure that the Binder is active in the UI
-        keystroke "B" using {control down, option down, command down}
 
         -- export
         click menu item "Files..." of menu 1 of menu item "Export" of menu "File" of menu bar 1
